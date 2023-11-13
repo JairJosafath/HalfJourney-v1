@@ -1,0 +1,245 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  HalfJourney
+
+  Sample SAM Template for HalfJourney
+
+Globals:
+  Function:
+    Timeout: 10
+    Handler: app.handler
+    Runtime: nodejs18.x
+    Architectures:
+      - x86_64
+
+Resources:
+  InteractionHandler:
+    Type: AWS::Serverless::Function 
+    Properties:
+      CodeUri: InteractionHandler/
+      Events:
+        HalfJourneyApi:
+          Type: Api 
+          Properties:
+            Path: /
+            Method: post
+      Environment:
+        Variables:
+          PUBLIC_KEY: <your public key>
+          TABLENAME: HalfJourneyTable
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: HalfJourneyTable
+    Metadata: 
+      BuildMethod: esbuild
+      BuildProperties:
+        Minify: true
+        Target: "es2020"
+        Sourcemap: true
+        External:
+        - "@aws-sdk/*"
+        EntryPoints: 
+        - app.ts
+  
+  CommandBuilder:
+    Type: AWS::Serverless::Function 
+    Properties:
+      CodeUri: CommandBuilder/
+      Events:
+        HalfJourneyApi:
+          Type: Api 
+          Properties:
+            Path: /commands
+            Method: post
+      Environment:
+        Variables:
+          APP_ID: <your app id>
+          BOT_TOKEN: <your bot token>
+    Metadata: 
+      BuildMethod: esbuild
+      BuildProperties:
+        Minify: true
+        Target: "es2020"
+        Sourcemap: true
+        EntryPoints: 
+        - app.ts
+ 
+  HalfJourneyTable: 
+    Type: AWS::DynamoDB::Table
+    Properties: 
+      TableName: "HalfJourneyTable"
+      AttributeDefinitions: 
+        - 
+          AttributeName: "UserId"
+          AttributeType: "S"
+        -
+          AttributeName: "PromptId"
+          AttributeType: "S"
+      KeySchema: 
+        - 
+          AttributeName: "UserId"
+          KeyType: "HASH"
+        - 
+          AttributeName: "PromptId"
+          KeyType: "RANGE"
+      ProvisionedThroughput: 
+        ReadCapacityUnits: "3"
+        WriteCapacityUnits: "3"
+      StreamSpecification:
+        StreamViewType: NEW_IMAGE
+
+  ImageGenerator:
+    Type: AWS::Serverless::Function 
+    Properties:
+      Timeout: 900
+      CodeUri: ImageGenerator/
+      Events:
+        DDBStream:
+          Type: DynamoDB
+          Properties:
+            Stream:
+              !GetAtt HalfJourneyTable.StreamArn
+            StartingPosition: LATEST
+            BatchSize: 20
+            Enabled: true
+            FilterCriteria:
+              Filters:
+                - Pattern: '{ "dynamodb" : { "NewImage" : { "Key" :  [ { "exists": false } ] } } }'
+      Environment:
+        Variables:
+          BUCKET: halfjourneybucket1234
+          TABLENAME: HalfJourneyTable
+          APIKEY: <your api key>
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: HalfJourneyTable
+        - S3CrudPolicy:
+            BucketName: halfjourneybucket1234
+    Metadata: 
+      BuildMethod: esbuild
+      BuildProperties:
+        Minify: true
+        Target: "es2020"
+        External:
+        - '@aws-sdk/*'
+        Sourcemap: true
+        EntryPoints: 
+        - app.ts
+    
+  # ImageGeneratorBedrock:
+  #   Type: AWS::Serverless::Function 
+  #   Properties:
+  #     Timeout: 900
+  #     CodeUri: ImageGeneratorBedrock/
+  #     Runtime: python3.11
+  #     Events:
+  #       DDBStream:
+  #         Type: DynamoDB
+  #         Properties:
+  #           Stream:
+  #             !GetAtt HalfJourneyTable.StreamArn
+  #           StartingPosition: LATEST
+  #           BatchSize: 20
+  #           Enabled: true
+  #           FilterCriteria:
+  #             Filters:
+  #               - Pattern: '{ "dynamodb" : { "NewImage" : { "Key" :  [ { "exists": false } ] } } }'
+  #     Environment:
+  #       Variables:
+  #         BUCKET: halfjourneybucket1234
+  #         TABLENAME: HalfJourneyTable
+  #         APIKEY: <your api key>
+  #     Policies:
+  #       - DynamoDBCrudPolicy:
+  #           TableName: HalfJourneyTable
+  #       - S3CrudPolicy:
+  #           BucketName: halfjourneybucket1234
+  #       - Version: '2012-10-17'
+  #         Statement:
+  #           - Sid: BedrockPolicy
+  #             Effect: Allow
+  #             Action:
+  #               - bedrock:*
+  #             Resource: '*'
+
+    
+
+  S3Bucket:
+    Type: 'AWS::S3::Bucket'
+    Properties:
+      BucketName: halfjourneybucket1234
+      PublicAccessBlockConfiguration:
+                BlockPublicAcls: false
+                BlockPublicPolicy: false
+                IgnorePublicAcls: false
+                RestrictPublicBuckets: false
+  MyBucketPolicy:
+            Type: 'AWS::S3::BucketPolicy'
+            Properties:
+              Bucket:
+                Ref: 'S3Bucket'
+              PolicyDocument:
+                Version: '2012-10-17'
+                Statement:
+                  - Effect: Allow
+                    Principal: '*'
+                    Action: 's3:GetObject'
+                    Resource:
+                      Fn::Join:
+                        - ''
+                        - - 'arn:aws:s3:::'
+                          - Ref: 'S3Bucket'
+                          - '/public/*'
+              
+  Notifier:
+    Type: AWS::Serverless::Function 
+    Properties:
+      CodeUri: Notifier/
+      Events:
+        S3Event:
+          Type: S3
+          Properties:
+            Bucket:
+              Ref: S3Bucket  
+            Events: s3:ObjectCreated:*
+            Filter:
+              S3Key:
+                Rules:
+                - Name: suffix    
+                  Value: .png      
+
+      Environment:
+        Variables:
+          APP_ID: <your app id>
+          BUCKET: halfjourneybucket1234
+    Metadata: 
+      BuildMethod: esbuild
+      BuildProperties:
+        Minify: true
+        Target: "es2020"
+        Sourcemap: true
+        External: 
+        - '@aws-sdk/*'
+        EntryPoints: 
+        - app.ts
+
+Outputs:
+  HalfJourneyApi:
+    Description: "API Gateway endpoint URL for Prod stage for Halfjourney discord bot"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod"
+  InteractionHandler:
+    Description: "InteractionHandler Lambda Function ARN"
+    Value: !GetAtt InteractionHandler.Arn
+  InteractionHandlerRole:
+    Description: "Implicit IAM Role created for Hello World function"
+    Value: !GetAtt InteractionHandler.Arn
+  CommandBuilder:
+    Description: "CommandBuilder Lambda Function ARN"
+    Value: !GetAtt CommandBuilder.Arn
+  CommandBuilderRole:
+    Description: "Implicit IAM Role created for Hello World function"
+    Value: !GetAtt CommandBuilder.Arn
+  HalfJourneyTable:
+    Description: "HalfJourneyTable"
+    Value: !GetAtt HalfJourneyTable.Arn

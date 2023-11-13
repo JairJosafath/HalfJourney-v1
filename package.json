@@ -1,0 +1,15 @@
+{
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.126",
+    "@types/node": "^20.9.0"
+  },
+  "dependencies": {
+    "@aws-sdk/client-bedrock-runtime": "^3.445.0",
+    "@aws-sdk/client-dynamodb": "^3.445.0",
+    "@aws-sdk/client-s3": "^3.449.0",
+    "discord-api-types": "^0.37.62",
+    "i": "^0.3.7",
+    "npm": "^10.2.3",
+    "tweetnacl": "^1.0.3"
+  }
+}
