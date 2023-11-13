@@ -2,7 +2,7 @@
 
 # **Part 1: Setting up a Discord Bot and AWS Integration**
 
-![Untitled](https://halfjourneybucket1234.s3.eu-north-1.amazonaws.com/public/readme/10.png)
+![Untitled](https://halfjourneybucket1234.s3.eu-north-1.amazonaws.com/public/readme/1.png)
 
 In this post, we will walk through the process of setting up a Discord bot and integrating it with AWS using the Serverless Application Model (SAM) for a seamless development experience. This is the first part of a multi-part series, so let's get started.
 
@@ -15,14 +15,14 @@ In this post, we will walk through the process of setting up a Discord bot and i
 
 1. Enter a name for your bot, and you will be brought to your bot information page. Make sure to note down your application ID and public key, as you'll need them later.
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/cf23beb8-b835-4018-a25f-6dcaeac0a3af/70066def-b7d6-46ff-954e-473fe1c6198b/Untitled.png)
+![Untitled](https://halfjourneybucket1234.s3.eu-north-1.amazonaws.com/public/readme/2.png)
 
 1. Feel free to add more information about your bot.
 2. In the sidebar, go to "Bot" and reset your secret token. Keep this token safe; it's called a secret token for a reason.
 
 Congratulations! You now have your Discord bot set up. Let's proceed to the AWS integration.
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/cf23beb8-b835-4018-a25f-6dcaeac0a3af/5b398e4d-df8e-4ac7-a88c-50966055b712/Untitled.png)
+![Untitled](https://halfjourneybucket1234.s3.eu-north-1.amazonaws.com/public/readme/3.png)
 
 For this project we wont need to fill in all of the urls, but the “interaction endpoint url”, this is how we will connect our discordbot to aws
 
@@ -48,7 +48,7 @@ When asked about the package type, choose "Zip" to enable TypeScript support. Ch
 
 Your project structure should now look like this:
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/cf23beb8-b835-4018-a25f-6dcaeac0a3af/b5b4ab85-fce9-4532-ba7d-06e27d89e525/Untitled.png)
+![Untitled](https://halfjourneybucket1234.s3.eu-north-1.amazonaws.com/public/readme/4.png)
 
 Let's take a closer look at what SAM has generated for us.
 
@@ -72,7 +72,7 @@ sam local invoke HelloWorldFunction -e events/event.json
 
 You should see a response.
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/cf23beb8-b835-4018-a25f-6dcaeac0a3af/f0ae3f9d-c041-46df-ae4a-a676cbcc15d9/Untitled.png)
+![Untitled](https://halfjourneybucket1234.s3.eu-north-1.amazonaws.com/public/readme/5.png)
 
 To deploy your project to the cloud, use the following command:
 
@@ -92,7 +92,7 @@ lets get the endpoint URL, since we need that for the discord bot.
 
 you should get this error if you try to save your changes
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/cf23beb8-b835-4018-a25f-6dcaeac0a3af/6b6d7925-53b8-47ef-b220-76228000ee0b/Untitled.png)
+![Untitled](https://halfjourneybucket1234.s3.eu-north-1.amazonaws.com/public/readme/7.png)
 
 If you attempt to save changes in your Discord bot, you might encounter an error related to security and authorization. To address this, you need to modify your Lambda function code to enable verification.
 
@@ -211,7 +211,7 @@ When responding to Discord requests, always ensure that the body is stringified.
 
 Now, try saving your changes in the Discord bot; it should work without errors.
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/cf23beb8-b835-4018-a25f-6dcaeac0a3af/e5b7c83f-d5c6-4b6a-a8b4-0ffb8f59ccbf/Untitled.png)
+![Untitled](https://halfjourneybucket1234.s3.eu-north-1.amazonaws.com/public/readme/8.png)
 
 ## **Renaming Lambda Function and API Gateway**
 
@@ -219,7 +219,7 @@ Before we wrap up Part 1, let's rename your Lambda function and API Gateway to "
 
 Your project structure should now look like this:
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/cf23beb8-b835-4018-a25f-6dcaeac0a3af/8c0a49c9-41c7-4b73-b1fd-a625a42c45d5/Untitled.png)
+![Untitled](https://halfjourneybucket1234.s3.eu-north-1.amazonaws.com/public/readme/9.png)
 
 You can validate your SAM project using the following command:
 
