@@ -2,7 +2,7 @@
 
 # **Part 1: Setting up a Discord Bot and AWS Integration**
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/cf23beb8-b835-4018-a25f-6dcaeac0a3af/aac797de-dfcb-4f08-bcb9-d38d19a17505/Untitled.png)
+![Untitled](https://halfjourneybucket1234.s3.eu-north-1.amazonaws.com/public/readme/10.png)
 
 In this post, we will walk through the process of setting up a Discord bot and integrating it with AWS using the Serverless Application Model (SAM) for a seamless development experience. This is the first part of a multi-part series, so let's get started.
 
