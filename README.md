@@ -1,4 +1,3 @@
-# Blog
 
 # **Part 1: Setting up a Discord Bot and AWS Integration**
 
