@@ -301,7 +301,7 @@ To keep our code organized and efficient, we'll break down the functionality int
 
 Here's the architectural overview:
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/cf23beb8-b835-4018-a25f-6dcaeac0a3af/92416184-1ee5-47f6-88c1-16abca20a039/Untitled.png)
+![Untitled](https://halfjourneybucket1234.s3.eu-north-1.amazonaws.com/public/readme/10.png)
 
 ## **Setting Up CommandBuilder**
 
@@ -422,11 +422,11 @@ https://discord.com/developers/applications/1171867441895325888/oauth2/url-gener
 
 Test your new command in Discord.
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/cf23beb8-b835-4018-a25f-6dcaeac0a3af/261bfbf9-a676-493e-bf02-18144b22371f/Untitled.png)
+![Untitled](https://halfjourneybucket1234.s3.eu-north-1.amazonaws.com/public/readme/11.png)
 
 ## **Adjusting InteractionHandler for Slash Commands**
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/cf23beb8-b835-4018-a25f-6dcaeac0a3af/22de8815-3caf-444f-8e7c-e6fb03e9bc53/Untitled.png)
+![Untitled](https://halfjourneybucket1234.s3.eu-north-1.amazonaws.com/public/readme/12.png)
 
 1. Modify the **`InteractionHandler`** Lambda function to handle slash commands. You can adjust the code like this:
 
@@ -585,13 +585,13 @@ Environment:
 
 That's it for Part 2! You have set up slash commands, created a CommandBuilder Lambda function, and integrated a DynamoDB table to store user prompts. In Part 3, you can proceed to generate AI images based on user prompts.
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/cf23beb8-b835-4018-a25f-6dcaeac0a3af/16080ead-f28e-492b-9127-4bdb4165f0ec/Untitled.png)
+![Untitled](https://halfjourneybucket1234.s3.eu-north-1.amazonaws.com/public/readme/13.png)
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/cf23beb8-b835-4018-a25f-6dcaeac0a3af/2c68b03b-419b-4664-b82c-622c9987d6cc/Untitled.png)
+![Untitled](https://halfjourneybucket1234.s3.eu-north-1.amazonaws.com/public/readme/14.png)
 
 # Part 3: Image Generation and Storing in S3
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/cf23beb8-b835-4018-a25f-6dcaeac0a3af/df85095f-0c57-4566-80e7-59bf34f9e52f/Untitled.png)
+![Untitled](https://halfjourneybucket1234.s3.eu-north-1.amazonaws.com/public/readme/15.png)
 
 In Part 2, we set up the command builder and integrated a DynamoDB table to store user prompts. Now, in Part 3, we will focus on image generation and storing these images in an S3 bucket.
 
@@ -996,15 +996,15 @@ For testing we will use low quality images
 
 lets test it!
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/cf23beb8-b835-4018-a25f-6dcaeac0a3af/98db3d4e-0ed3-4199-912b-80de432b6b97/Untitled.png)
+![Untitled](https://halfjourneybucket1234.s3.eu-north-1.amazonaws.com/public/readme/16.png)
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/cf23beb8-b835-4018-a25f-6dcaeac0a3af/269fd294-fa78-4f85-97d4-6cc9d56579a5/Untitled.png)
+![Untitled](https://halfjourneybucket1234.s3.eu-north-1.amazonaws.com/public/readme/17.png)
 
-![1171866087638438039-1699724061143.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/cf23beb8-b835-4018-a25f-6dcaeac0a3af/62a5b3cd-0271-4692-aed2-cffee92a5dae/1171866087638438039-1699724061143.png)
+![1171866087638438039-1699724061143.png](https://halfjourneybucket1234.s3.eu-north-1.amazonaws.com/public/readme/18.png)
 
 # Part IV: Notifying Users and Wrap up
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/cf23beb8-b835-4018-a25f-6dcaeac0a3af/d75d5ab4-c4ec-4f94-92c8-b297672a2593/Untitled.png)
+![Untitled](https://halfjourneybucket1234.s3.eu-north-1.amazonaws.com/public/readme/19.png)
 
 In the final part of building HalfJourney, the goal is to notify users when an image is generated.This section outlines the creation of a Notifier function to accomplish this.
 
@@ -1108,7 +1108,7 @@ This code retrieves the image from the S3 bucket, sends a notification to Discor
 
 ## Testing the Notifier
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/cf23beb8-b835-4018-a25f-6dcaeac0a3af/25c304b7-9a30-4694-afb3-0218d468e97a/Untitled.png)
+![Untitled](https://halfjourneybucket1234.s3.eu-north-1.amazonaws.com/public/readme/20.png)
 
 there we go! our generated image!
 
