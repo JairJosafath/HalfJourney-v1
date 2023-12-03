@@ -1,7 +1,7 @@
 
 # **Part 1: Setting up a Discord Bot and AWS Integration**
 
-![Untitled](https://halfjourneybucket1234.s3.eu-north-1.amazonaws.com/public/readme/1.png)
+![Untitled](readme/1.png)
 
 In this post, we will walk through the process of setting up a Discord bot and integrating it with AWS using the Serverless Application Model (SAM) for a seamless development experience. This is the first part of a multi-part series, so let's get started.
 
@@ -11,14 +11,14 @@ In this post, we will walk through the process of setting up a Discord bot and i
 2. In the sidebar, click on "Applications" and then select "New Application."
 3. Enter a name for your bot, and you will be brought to your bot information page. Make sure to note down your application ID and public key, as you'll need them later.
 
-![Untitled](https://halfjourneybucket1234.s3.eu-north-1.amazonaws.com/public/readme/2.png)
+![Untitled](readme/2.png)
 
 1. Feel free to add more information about your bot.
 2. In the sidebar, go to "Bot" and reset your secret token. Keep this token safe; it's called a secret token for a reason.
 
 Congratulations! You now have your Discord bot set up. Let's proceed to the AWS integration.
 
-![Untitled](https://halfjourneybucket1234.s3.eu-north-1.amazonaws.com/public/readme/3.png)
+![Untitled](readme/3.png)
 
 For this project we wont need to fill in all of the urls, but the “interaction endpoint url”, this is how we will connect our discordbot to aws
 
@@ -44,7 +44,7 @@ When asked about the package type, choose "Zip" to enable TypeScript support. Ch
 
 Your project structure should now look like this:
 
-![Untitled](https://halfjourneybucket1234.s3.eu-north-1.amazonaws.com/public/readme/5.png)
+![Untitled](readme/5.png)
 
 Let's take a closer look at what SAM has generated for us.
 
@@ -68,7 +68,7 @@ sam local invoke HelloWorldFunction -e events/event.json
 
 You should see a response.
 
-![Untitled](https://halfjourneybucket1234.s3.eu-north-1.amazonaws.com/public/readme/7.png)
+![Untitled](readme/7.png)
 
 To deploy your project to the cloud, use the following command:
 
@@ -88,7 +88,7 @@ lets get the endpoint URL, since we need that for the discord bot.
 
 you should get this error if you try to save your changes
 
-![Untitled](https://halfjourneybucket1234.s3.eu-north-1.amazonaws.com/public/readme/8.png)
+![Untitled](readme/8.png)
 
 If you attempt to save changes in your Discord bot, you might encounter an error related to security and authorization. To address this, you need to modify your Lambda function code to enable verification.
 
@@ -207,7 +207,7 @@ When responding to Discord requests, always ensure that the body is stringified.
 
 Now, try saving your changes in the Discord bot; it should work without errors.
 
-![Untitled](https://halfjourneybucket1234.s3.eu-north-1.amazonaws.com/public/readme/9.png)
+![Untitled](readme/9.png)
 
 ## **Renaming Lambda Function and API Gateway**
 
@@ -215,7 +215,7 @@ Before we wrap up Part 1, let's rename your Lambda function and API Gateway to "
 
 Your project structure should now look like this:
 
-![Untitled](https://halfjourneybucket1234.s3.eu-north-1.amazonaws.com/public/readme/10.png)
+![Untitled](readme/10.png)
 
 You can validate your SAM project using the following command:
 
@@ -297,7 +297,7 @@ To keep our code organized and efficient, we'll break down the functionality int
 
 Here's the architectural overview:
 
-![Untitled](https://halfjourneybucket1234.s3.eu-north-1.amazonaws.com/public/readme/11.png)
+![Untitled](readme/11.png)
 
 ## **Setting Up CommandBuilder**
 
@@ -418,11 +418,11 @@ https://discord.com/developers/applications/1171867441895325888/oauth2/url-gener
 
 Test your new command in Discord.
 
-![Untitled](https://halfjourneybucket1234.s3.eu-north-1.amazonaws.com/public/readme/12.png)
+![Untitled](readme/12.png)
 
 ## **Adjusting InteractionHandler for Slash Commands**
 
-![Untitled](https://halfjourneybucket1234.s3.eu-north-1.amazonaws.com/public/readme/13.png)
+![Untitled](readme/13.png)
 
 1. Modify the **`InteractionHandler`** Lambda function to handle slash commands. You can adjust the code like this:
 
@@ -581,13 +581,13 @@ Environment:
 
 That's it for Part 2! You have set up slash commands, created a CommandBuilder Lambda function, and integrated a DynamoDB table to store user prompts. In Part 3, you can proceed to generate AI images based on user prompts.
 
-![Untitled](https://halfjourneybucket1234.s3.eu-north-1.amazonaws.com/public/readme/14.png)
+![Untitled](readme/14.png)
 
-![Untitled](https://halfjourneybucket1234.s3.eu-north-1.amazonaws.com/public/readme/15.png)
+![Untitled](readme/15.png)
 
 # Part 3: Image Generation and Storing in S3
 
-![Untitled](https://halfjourneybucket1234.s3.eu-north-1.amazonaws.com/public/readme/16.png)
+![Untitled](readme/16.png)
 
 In Part 2, we set up the command builder and integrated a DynamoDB table to store user prompts. Now, in Part 3, we will focus on image generation and storing these images in an S3 bucket.
 
@@ -992,15 +992,15 @@ For testing we will use low quality images
 
 lets test it!
 
-![Untitled](https://halfjourneybucket1234.s3.eu-north-1.amazonaws.com/public/readme/17.png)
+![Untitled](readme/17.png)
 
-![Untitled](https://halfjourneybucket1234.s3.eu-north-1.amazonaws.com/public/readme/18.png)
+![Untitled](readme/18.png)
 
-![1171866087638438039-1699724061143.png](https://halfjourneybucket1234.s3.eu-north-1.amazonaws.com/public/readme/19.png)
+![1171866087638438039-1699724061143.png](readme/19.png)
 
 # Part IV: Notifying Users and Wrap up
 
-![Untitled](https://halfjourneybucket1234.s3.eu-north-1.amazonaws.com/public/readme/20.png)
+![Untitled](readme/20.png)
 
 In the final part of building HalfJourney, the goal is to notify users when an image is generated.This section outlines the creation of a Notifier function to accomplish this.
 
@@ -1104,7 +1104,7 @@ This code retrieves the image from the S3 bucket, sends a notification to Discor
 
 ## Testing the Notifier
 
-![Untitled](https://halfjourneybucket1234.s3.eu-north-1.amazonaws.com/public/readme/21.png)
+![Untitled](readme/21.png)
 
 there we go! our generated image!
 
@@ -1115,4 +1115,4 @@ also tag me or let me know if you added any cool features or if you took another
 thanks for hanging!
 
 now look at this multi legged wolf!
-![Untitled](https://halfjourneybucket1234.s3.eu-north-1.amazonaws.com/public/readme/22.png)
+![Untitled](readme/22.png)
